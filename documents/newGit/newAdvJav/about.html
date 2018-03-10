@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cookies About</title>
+
+	
+	<script>
+	function setCookies(cName, cValue, exDays)
+		{
+			var path = "path=/";
+			var expireDate = new Date();
+			expireDate.setTime(expireDate.getTime() + (exDays * 24 * 60 * 60 * 1000));
+			var expires = "expires="+expireDate.toUTCString();
+			document.cookies = cName + "=" + cValue + "; " + expires;
+			
+		}
+			
+		function getCookies(cName) 
+		{
+				var name = cName + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1);
+				if (c.indexOf(name) == 0) {
+				return c.substring(name.length,c.length);
+				if (name != "authentication" && c.substring(name.length,c.length) != "1" ) 
+				{
+				window.location = "home.html";
+				}
+			}
+		}
+
+				return "";
+			}
+	
+		function displayCookies() 
+		{
+			//alert ("working!");
+				alert( document.cookie );
+			}
+		
+		function getVisits() 
+		{
+			//alert ("getVisits Working!")
+			alert( "Number of visits: " + getCookies("counter") )
+			}
+		
+		function resetVisits()
+		{
+			//alert ("resetVisits Working!")
+			setCookies("counter", 0, 3);
+		}
+			
+		function deletecookies(cName)
+		{
+			var expires = "expires=expires=Thu, 01 Jan 1970 00:00:00 UTC";
+			document.cookies = cName + "=nothing;" + expires;
+		}
+		function checkLegit()
+		{
+			var legit = getCookies("authentication");
+			alert (legit);
+			if (legit !=1); 
+			{ 
+			window.location = "home.html";
+			window.location = "home.html";
+			
+		}
+		}
+		function deleteAuth() {
+				setCookie("authentication", 0, 180);
+			}
+
+
+		</script>
+
+  </head>
+
+		<body onload = "checkLegit()s">
+		<h1>Cookies About</h1>
+		
+			<p>
+    <a href="home.html">Back to Cookie Home Page</a>
+  </p>
+
+  <p>
+    <input type="button" value="VIEW cookies" onclick="displayCookies()" />
+  </p>
+			
+			<p id="showVisits">
+    <input type="button" value="Visits" onclick="getVisits()" />
+  </p>
+			
+			<p>
+    		<input type="button" value="Reset Visits" onclick="resetVisits()" />
+  			</p>
+  		 
+    		<p>
+    		<input type="button" value="Delete Authorization" onclick="deleteAuth()" />
+  		</p>
+  
+
+
+  </body>
+</html>

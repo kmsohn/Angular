@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WDV321 Advanced Javascript Dynamic Form Example</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
+    <style media="screen">
+		
+      body {
+        font-family: Arial;
+      }
+
+      select {
+        border: 2px solid black;
+      }
+
+    </style>
+	</head>
+	<body>
+	<h1>WDV321 Advanced Javascript</h1>
+<h3>Dynamic Form Example</h3>
+	
+    <form class="" action="index.html" method="post" id="form2">
+      <p><b>Select one of the options:</b></p>
+      <p>
+      <label for="productsRadio">Products</label>
+      <input type="radio" name="radioSelection" value="products">
+      <label for="colorsRadio">Colors</label>
+      <input type="radio" name="radioSelection" value="colors">
+      </p>
+		
+
+	<p>Please make your vehicle selection:</p>
+		  <select class="" name="" id="dropdown2">
+      </select>
+    </form>
+		<script type="text/javascript">
+			
+	var productsArray=['Volkswagon', 'Jaguar', 'Lexus', 'BMW', 'Bugatti'];
+	var colorsArray=['Red', 'Aqua', 'Pearl', 'Navy', 'Blue'];
+	
+	var preSelect = $('input[name=radioSelection][value=products]').prop('checked',true);
+			
+  if (preSelect) {
+      for(var i = 0; i < productsArray.length; i++) {
+        $('#dropdown2').append('<option value='+i+'>'+productsArray[i]+'</option>');
+      }
+    }
+			
+	$('input:radio[name="radioSelection"]').change(function(){
+      $('#dropdown2').empty();
+      if($(this).val() === 'products'){
+        for(var i = 0; i < productsArray.length; i++) {
+          $('#dropdown2').append('<option value='+i+'>'+productsArray[i]+'</option>');
+        }
+      }
+      else if ($(this).val() === 'colors'){
+        for(var i = 0; i < colorsArray.length; i++) {
+          $('#dropdown2').append('<option value='+i+'>'+colorsArray[i]+'</option>');
+        }
+      }
+    });
+
+    </script>
+
+    <script type="text/javascript">
+
+
+    </script>
+
+  </body>
+</html>

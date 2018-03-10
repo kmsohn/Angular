@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cookies</title>
+
+	
+	<script>
+	function setCookies(cName, cValue, exDays)
+		{
+			var path = "path=/";
+			var expireDate = new Date();
+			expireDate.setTime(expireDate.getTime() + (exDays * 24 * 60 * 60 * 1000));
+			var expires = "expires="+expireDate.toUTCString();
+			document.cookies = cName + "=" + cValue + "; " + expires;
+			
+		}
+			
+		function getCookies(cName) {
+			var name = cName + "=";
+			var cs = document.cookie.split(';');
+			for (var i=0; i<cs.length; i++){
+				var c = cs[i];
+				while (c.charAt(0)==' ') c = c.substring(i);
+				if (c.indexOf(name) == 0){
+					return c.substring(name.length,c.length);
+					
+				}
+			}
+			return "";
+		}	
+	
+		function displayCookies();
+		{
+			alert (document.cookies);
+		}
+		function deletecookies(cName){
+			var expires = "expires=expires=Thu, 01 Jan 1970 00:00:00 UTC";
+			document.cookies = cName + "=nothing;" + expires;
+		}
+		
+
+
+		</script>
+
+  </head>
+<body>
+		<h1>Cookies Home Example</h1>
+
+		<p>
+			<a href="about.html">Go to Cookie About Page</a>
+		</p>
+
+  </body>
+</html>

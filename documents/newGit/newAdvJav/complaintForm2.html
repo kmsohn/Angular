@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Form Validation Project</title>
+
+<style>
+
+label	{
+	width:150px;
+	display:inline-block;	
+}
+
+</style>
+
+</head>
+<script type="text/javascript">
+
+var verifyInput1 = "";
+var verifyInput2 = "";
+var verifyInput3 = "";
+var verifyInput4 = "";
+var verifyInput5 = "";
+
+function verify() {
+
+	verifyInput1 = document.getElementById("custName").value;
+	var verified1 = document.getElementById("custSpan").innerHTML = /^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$/.test(verifyInput1);
+
+	if (verifyInput1 == "") {
+		document.getElementById("custSpan").innerHTML = "Required";
+	}
+
+	else {
+		document.getElementById("custSpan").innerHTML = "";
+	}
+
+	if (verified1 == true) {
+		document.getElementById("custName").style.borderColor = "";
+	}
+
+	else {
+		document.getElementById("custName").style.borderColor = "red";
+	}
+
+	verifyInput5 = document.getElementById("custEmail").value;
+	var verified5 = document.getElementById("custEmailSpan").innerHTML = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/.test(verifyInput5);
+
+	if (verifyInput5 == "") {
+		document.getElementById("custEmailSpan").innerHTML = "Required";
+	}
+
+	else {
+		document.getElementById("custEmailSpan").innerHTML = "";
+	}
+
+	if (verified5 == true) {
+		document.getElementById("custEmail").style.borderColor = "";
+	}
+
+	else {
+		document.getElementById("custEmail").style.borderColor = "red";
+	}
+
+	
+	verifyInput2 = document.getElementById("custPhone").value;
+	var verified2 = document.getElementById("custPhoneSpan").value = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/.test(verifyInput2);
+
+	if (verified2 == true) {
+		document.getElementById("custPhoneSpan").innerHTML = "";
+	}
+
+	else if (verified2 == false && verifyInput2.length > 1) {
+		document.getElementById("custPhoneSpan").innerHTML = "Invalid";
+	}
+
+	else if (verifyInput2.length < 1) {
+		document.getElementById("custPhoneSpan").innerHTML = "";
+	}
+
+if (verifyInput2 == "") {
+		document.getElementById("custPhoneSpan").innerHTML = "Required";
+	}
+
+	else {
+		document.getElementById("custPhoneSpan").innerHTML = "";
+	}
+
+	if (verified2 == true) {
+		document.getElementById("custPhone").style.borderColor = "";
+	}
+
+	else {
+		document.getElementById("custPhone").style.borderColor = "red";
+	}
+	
+	
+	if (document.querySelectorAll('input[type="radio"]:checked').length === 0) {
+		document.getElementById('productsSpan').innerHTML = "Please select one!";
+
+	}
+  else {
+		document.getElementById('productsSpan').innerHTML = "";
+		verifyInput3 = true;
+	}
+	
+	
+	
+	verifyInput4 = document.getElementById("custComplaint").value;
+
+	if (verifyInput4 == "") {
+		document.getElementById("custComplaintSpan").innerHTML = "Nothing in field!";
+		document.getElementById('custComplaint').style.borderColor = "red";
+	}
+
+	else if (verifyInput4.length > 120 ) {
+		document.getElementById('custComplaintSpan').innerHTML = "That exceeds 120 characters";
+		document.getElementById('custComplaint').style.borderColor = "red";
+	}
+
+	else if (verifyInput4.value = /<|>/g.test(verifyInput4) == true) {
+		document.getElementById('custComplaintSpan').innerHTML = "Invalid Characters";
+		document.getElementById('custComplaint').style.borderColor = "red";
+	}
+
+	else if (verifyInput4.length < 200 && verifyInput4.length > 0) {
+		document.getElementById('custComplaintSpan').innerHTML = "";
+		document.getElementById('custComplaint').style.borderColor = "";
+		verifyInput4 = true;
+	}
+	
+	if (verified1 && verified5 && verifyInput3 && verifyInput4 == true) {
+			alert("Thank you, We appreciate your opinion!");
+			document.getElementById("form1").submit();
+	}
+	
+}
+
+function resetFunction() {
+	document.getElementById("custName").style.borderColor = "";
+
+	document.getElementById("custEmail").style.borderColor = "";
+
+	document.getElementById("custPhone").style.borderColor = "";
+
+	document.getElementById('custComplaint').style.borderColor = "";
+
+	document.getElementById("custSpan").innerHTML = "";
+
+	document.getElementById("custEmailSpan").innerHTML = "";
+
+	document.getElementById("custPhoneSpan").innerHTML = "";
+
+	document.getElementById('custComplaintSpan').innerHTML = "";
+
+	document.getElementById('custComplaint').style.borderColor = "";
+
+	document.getElementById('productsSpan').innerHTML = "";
+
+}
+	</script>
+	
+<body>
+
+	<h2>WDV321 Advanced Javascript </h2>
+	<h3>Form Validation Project - Complaint Form</h3>
+	<form id="form1" name="form1" method="post" action="">
+	  <p id="instructions">Please enter the following information in order to process your concerns.</p>
+	  <p>
+	    <label for="custName">Name: <span id="custSpan"></span></label>
+	  	<input type="text" name="custName" id="custName" />
+	  </p>
+		<p>
+	    <label for="custName">E-Mail: <span id="custEmailSpan"></span></label>
+	  	<input type="text" name="custEmail" id="custEmail" />
+	  </p>
+	  <p>
+	    <label for="custPhone">Phone Number: <span id="custPhoneSpan"></span> </label>
+	    <input type="text" name="custPhone" id="custPhone" />
+	  </p>
+	  <p>Please Select Product Group: <span id="productsSpan"></span></p>
+	  <p>
+	      <input type="radio" name="custProducts" value="books" id="custProducts_0" />
+	      <label>Books</label>
+	    <br />
+	      <input type="radio" name="custProducts" value="movies" id="custProducts_1" />
+	      <label>Movies</label>
+	    <br />
+	     <input type="radio" name="custProducts" value="electronic devices" id="custProducts_2" />
+				<label>Consumer Electronics</label>
+	    <br />
+	      <input type="radio" name="custProducts" value="computer" id="custProducts_3" />
+	      <label>Computer</label>
+	    <br />
+	  </p>
+	  <p>Description of problem:	(Limit 120 characters) <span id="custComplaintSpan"></span></p>
+	  <p>
+  <label for="custComplaint"></label>
+	    <textarea name="custComplaint" id="custComplaint" cols="45" rows="9"></textarea>
+      </p>
+	  <p>
+	    <button type="button" name="button" onclick="verify()" id="button1">Submit</button>
+	    <input type="reset" name="button2" id="button2" value="Reset" onclick="resetFunction()" />
+	  </p>
+</form>
+	<p>&nbsp;</p>
+</body>
+</html>

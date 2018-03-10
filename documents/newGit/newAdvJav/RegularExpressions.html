@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WDV321 Regular Expressions</title>
+	
+	<script src="jquery-3.2.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#validateForm").click(function() {
+			var inEmail = $("#email").val();
+			var inPhone = $("#phoneNum").val();
+			var inZip = $("#zip").val();
+			var inRandomText = $("#randomText").val();
+				
+		$("#emailErrorMsg,#phoneErrorMsg,#zipErrorMsg,#textErrorMsg,#convertedTextMsg").html("");
+		
+	if (inEmail == null || inEmail == undefined || inEmail == "") {     
+		$("#emailErrorMsg").html("Email is Required");
+		$("#email").removeClass("valid").addClass("invalid");
+		}else if(!/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(inEmail)){    
+		$("#emailErrorMsg").html("Invalid Email <br>(ex. yourName@yahoo.com)");
+		$("#email").removeClass("valid").addClass("invalid");
+		}else{$("#email").removeClass("invalid").addClass("valid");}
+				
+				
+	if(inPhone == null || inPhone == undefined || inPhone == "") {
+		$("#phoneErrorMsg").html("Number is Required");
+		$("#phoneNum").removeClass("valid").addClass("invalid");
+		}else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(inPhone)){
+		$("#phoneErrorMsg").html("Invalid Phone Number <br>(ex. 123-456-7890)");
+		$("#phoneNum").removeClass("valid").addClass("invalid");
+		}else{$("#phoneNum").removeClass("invalid").addClass("valid");}
+			
+			
+	if(inZip == null || inZip == undefined || inZip == ""){
+		$("#zipErrorMsg").html("Zip is Required");				$("#zip").removeClass("valid").addClass("invalid");
+		}else if(!/^[0-9]{5}(?:-[0-9]{4})?$/.test(inZip)){
+		$("#zipErrorMsg").html("Invalid Zip Code <br>(ex. 12345 or 12345-6789)");
+		$("#zip").removeClass("valid").addClass("invalid");
+		}else{$("#zip").removeClass("invalid").addClass("valid");}
+				
+	});
+	$("#reset").click(function() {
+$("#emailErrorMsg,#phoneErrorMsg,#zipErrorMsg,#textErrorMsg,#convertedTextMsg").html("");
+				$("#email,#phoneNum,#zip,#randomText").removeClass("valid invalid");
+			});
+		});
+		
+	</script>
+</head>	
+<body>	
+	<form id="form1" name="form1" method="post" action="">
+	  <h2>Regular Expressions</h2>
+	  <br>
+	  <p> 
+	    <label for="email">Email: <br><span id="emailErrorMsg" ></span></label>
+	  	<input type="text" name="Email" id="email" placeholder="yourName@gmail.com"/>
+	  </p>
+	  <p>
+	    <label for="phoneNum">Phone Number: <br><span id="phoneErrorMsg" ></span></label>
+	    <input type="text" name="PhoneNumber" id="phoneNum" placeholder="123-456-7890"/>
+	  </p>
+	  <p>
+	    <label for="zip">Zip: <br><span id="zipErrorMsg" > </span></label>
+	    <input type="text" name="Zip" id="zip" placeholder="12345 or 12345-1234"/>
+	  </p>
+	  
+	  <p id="formButtons">
+	    <input type="button" name="button" id="validateForm" value="Validate" />
+	    <input type="reset" name="button2" id="reset" value="Reset" />
+	  </p>
+	</form>
+	
+</body>
+</html>

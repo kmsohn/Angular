@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/south-street/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous">
+  </script>
+  
+<title>JQuery Form</title>
+</head>
+
+<body>
+<form>
+	<fieldset>
+		<legend>SPORTS - Sign-up Sheet</legend>
+		Date: <br>
+		<input type="text" name="date"  id="datepicker" title="Select Date"><br>
+		<h3 for="numOf">Select the number of years experience:</h3><br>
+		<select name="numOf" id="numOf" title="How many years.">
+		<option value="One">One</option>
+		<option value="Two">Two</option>
+		<option value="Three">Three</option>
+		<option value="Four">Four</option>
+		<option value="Five">Five</option>
+		<option value="More">Six Plus</option>
+		</select>
+		<br>
+		
+		<h3>Select your Favorite Hobby</h3>
+		<label for="radio1">Golf</label>
+		<input type="radio" name="radio1" id="radio1">
+		<label for="radio2">Football</label>
+		<input type="radio" name="radio2" id="radio2">
+		<label for="radio3">Softball</label>
+		<input type="radio" name="radio3" id="radio3">
+		<label for="radio4">Baseball</label>
+		<input type="radio" name="radio4" id="radio4">
+		<label for="radio5">Tennis</label>
+		<input type="radio" name="radio5" id="radio5">
+ <br>
+ <br/>
+
+<form>
+    <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>Teams Players:</legend>
+        <input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
+        <label for="checkbox-h-2a">One</label>
+        <input type="checkbox" name="checkbox-h-2b" id="checkbox-h-2b">
+        <label for="checkbox-h-2b">Two</label>
+        <input type="checkbox" name="checkbox-h-2c" id="checkbox-h-2c">
+        <label for="checkbox-h-2c">Three</label>
+        
+    </fieldset>
+</form>
+
+
+  <input type="button" value="Submit">
+  <input type="reset" value="Reset">
+</fieldset>
+  </form>
+  <script>
+    $( "#datepicker" ).datepicker();
+    $("#numOf" ).selectmenu();
+    $( document ).tooltip();
+    $( "input[type='radio']" ).checkboxradio();
+  </script>
+  
+  <form>
+  <p> 
+  	<label>Email:
+  	<input type="text" name="email">
+  	</label>
+  	<span id="emailErr"></span>
+		</p>
+  </form>
+  
+  <form class="cmxform" id="commentForm" method="get" action="">
+  <fieldset>
+    <legend>Please provide your name, email address (won't be published) and a comment</legend>
+    <p>
+      <label for="cname">Name (required, at least 2 characters)</label>
+      <input id="cname" name="name" minlength="2" type="text" required>
+    </p>
+    <p>
+      <label for="cemail">E-Mail (required)</label>
+      <input id="cemail" type="email" name="email" required>
+    </p>
+    <p>
+      <label for="curl">URL (optional)</label>
+      <input id="curl" type="url" name="url">
+    </p>
+    <p>
+      <label for="ccomment">Your comment (required)</label>
+      <textarea id="ccomment" name="comment" required></textarea>
+    </p>
+    <p>
+      <input class="submit" type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form>
+<script>
+$("#commentForm").validate();
+</script>
+
+  </body>
+</html>
