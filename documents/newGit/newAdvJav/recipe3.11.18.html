@@ -1,0 +1,194 @@
+<!doctype html>
+<html><head><title>Recipe Page</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WDV321 Advanced Javascript - Dynamic Content and Structure Project</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../../js/js.cookie.js"></script>
+
+	<script>
+
+	function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+	
+	function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+	</script>
+	
+	<script>
+	function checkCookie() {
+    var username = getCookie("username");
+    if (username != "") {
+        alert("Welcome again " + username);
+    } else {
+        username = prompt("Please enter your name:", "");
+        if (username != "" && username != null) {
+            setCookie("username", username, 365);
+        }
+    }
+}
+	</script>
+ 
+<script>
+$(function() {
+    $('.serving').bind('keyup', function(event) {
+        var previousValue = parseFloat($("#previousServing").val());
+        var newValue = parseFloat($(event.target).val());
+        if (previousValue && newValue) {
+            $('.ingredient').each(function(index, elem) {
+                var ingredientNow = $('.amount', elem);
+                var oldIngredientAmount = ingredientNow.text();
+                var newIngredientAmount = oldIngredientAmount * newValue / previousValue;
+                ingredientNow.text(newIngredientAmount);
+            });
+            $('#previousServing').val(newValue);
+        }
+    });
+});
+
+
+</script>
+
+<style>
+#header {
+	text-align: center;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+.header {
+	float: left;
+}
+
+.ing {
+	
+}
+
+.ins {
+
+}
+
+#recipeinstructions {
+	padding-left: 20%;
+}
+</style>
+
+</head>
+
+<body onload="checkCookie()">
+<div id="header">
+	<img src="food.jpg" />
+</div>
+<div id="recipeinstructions">
+<div class="header">
+<h1>Crockpot Chili</h1>
+<p><img src="chili.jpg" height="200px"/></p>
+<p>#Serving: <input type="text" name="serving" class="serving" value="6" size="3"/>
+<input type="hidden" id="previousServing" value="6"/><br />
+	preperation: 25 min. <br />
+	cooking: 6 hours <br />
+</p>
+
+		
+</div>
+
+<div style="float: left; padding-left: 10%">
+<div class="ing">
+<h2>Ingredients:</h2>
+<button id="on">Show</button> <button id="off">Hide</button>
+<div id="ingredients" style="display: none;"><!--Ingredients-->
+<ul class="ingredients">
+	<li class="ingredient"><span class="amount">2</span> tbsp. cooking oil</li>
+	<li class="ingredient"><span class="amount">1</span> cup onion</li>
+	<li class="ingredient"><span class="amount">1</span> cup chopped peppers</li>
+	<li class="ingredient"><span class="amount">4</span> tbsp. Chili powder</li>
+	<li class="ingredient"><span class="amount">1</span> tsp. Hot chili powder (optional)</li>
+	<li class="ingredient"><span class="amount">1</span> lb ground beef or chicken</li>
+	<li class="ingredient"><span class="amount">2</span> cans Red Beans</li>
+	<li class="ingredient"><span class="amount">2</span> cans Kidney Beans</li>
+	<li class="ingredient"><span class="amount">2</span> cans Tomato Puree</li>
+	<li class="ingredient"><span class="amount">2</span> cans Tomato Sauce</li>
+	<li class="ingredient"><span class="amount">1</span> cup shredded cheese (optional)</li>
+	<li class="ingredient"><span class="amount">0.5</span> cup sour cream (optional)</li>
+	
+</ul>
+</div><!--/Ingredients-->
+</div><!--/ing-->
+
+<div class="ins">
+<h2>Instructions:</h2>
+<button id="show">Show</button> <button id="hide">Hide</button>
+<div id="recipe" style="display: none;"><!--
+<div><!--Instructions-->
+<p>
+1. Heat cooking oil in 2 quart skillet.
+<br />
+2. Saute onions and peppers for 5 minutes.
+<br />
+3. Add spices and stir for 30 seconds.
+<br />
+4. Add meat and cook until browned. Approximately 15 minutes.
+<br />
+5. Pour contents of skillet into 3 quart crock pot.
+<br />
+6. Rinse beans and place in crockpot.
+<br />
+7. Open and pour Tomato puree and sauce into crock pot.
+<br />
+8. Cover crockpot and cook on low for 6 hours.
+<br />
+9. Serve into individual bowls and top with sour cream and cheese.
+	</p>
+</div><!--/instructions-->
+</div><!--/ins-->
+</div><!--/recipeinstructinos-->
+</div><!--/float right-->
+
+<script>
+//show/hide function
+$("#off").click(function(){
+  $("#ingredients").hide();
+});
+
+$("#on").click(function(){
+  $("#ingredients").show();
+});
+$("#hide").click(function(){
+  $("#recipe").hide();
+});
+
+$("#show").click(function(){
+  $("#recipe").show();
+});
+//end show/hide function
+</script>
+
+</body>
+</html>
