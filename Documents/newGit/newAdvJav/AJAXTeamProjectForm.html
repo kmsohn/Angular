@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Untitled Document</title>
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.get("AjaxTeam.php"); // Creates JSON objects
+			
+			var cupcakeArray = {"":"Select an Item","vanilla": "Vanilla Cupcake","chocolate": "Chocolate Cupcake","redVelvet": "Red Velvet Cupcake"};
+			var candyArray = {"":"Select an Item","reeses": "Reeses Peanut Butter Cupcake", "mms": "M&M's", "skittles": "Skittles"};
+			$("[type=radio]").click(function() {
+				var selectedRadioBtn = $("input:checked").val();
+				
+				if(selectedRadioBtn == "cupcakes")
+				{
+					itemArray = cupcakeArray;
+				}
+				else
+				{
+					itemArray = candyArray;
+				}
+				
+				var select = $('#select');
+				$('option', select).remove();
+				$.each(itemArray, function (value, text) {
+					var option = new Option(text, value);
+					select.append($(option));
+				});
+			});
+			
+			$("#select").change(function() {
+				$selectedChoice = $(this).val(); // Gets selected value
+				if($selectedChoice != "")
+				{
+					$.getJSON($selectedChoice + ".json", function(data) { //Gets data from JSON files
+						$("#description").html(data.description);
+						$("#price").html(data.price);
+						$("#image").html("<p><img src='" + data.image + "' ></p>");
+					})
+				}
+				else
+				{
+					$("#description").html("");
+					$("#price").html("");
+					$("#image").html("");
+				}
+			});
+			
+		});
+	</script>
+	<style type="text/css">
+	.bold {
+		font-weight: bold;
+	}
+	</style>
+	</head>
+
+	<body>
+		<h1>WDV321 Advanced Javascript</h1>
+		<h2>AJAX Team Project</h2>
+		<h3>Team Members: Kathy Sohn and Samantha Lange</h3>
+		<p>&nbsp;</p>
+		<form name="form1" method="post" action="">
+		  <h2>TRICK OR TREAT!!!</h2>
+		  <label for="cupcakes">Cupcake</label>
+		  <input type="radio" name="radio" id="cupcakes" value="cupcakes" />
+		  <label for="candy">Candy</label>
+		  <input type="radio" name="radio" id="candy" value="candy" />
+		  <p>Make your choice: 
+			<label>
+			  <select name="select" id="select">
+				<option value="">Select an Item</option>
+			  </select>
+			</label>
+		  </p>
+		  <p>Description: <span id="description"></span></p>
+		  <p>Price: <span id="price"></span></p>
+		  <p>Image: <span id="image"></span></p>
+		  <p>
+			<input type="submit" name="button" id="button" value="Submit">
+			<input type="submit" name="button2" id="button2" value="Submit">
+		  </p>
+		</form>
+		<p class="bold">Extra Credit:</p>
+		<p>Use an Ajax call to dynamically change the select to a choice of candy instead of cupcakes. Include the appropriate server side information. </p>
+	</body>
+</html>
